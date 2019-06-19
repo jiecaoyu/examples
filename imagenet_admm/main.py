@@ -192,6 +192,8 @@ def main_worker(gpu, ngpus_per_node, args):
         if os.path.isfile(args.resume):
             print("=> loading checkpoint '{}'".format(args.resume))
             checkpoint = torch.load(args.resume)
+            # If we want to perform retrain for ADMM, we need to specify
+            # the start_epoch by ourselves.
             if args.prune != 'retrain':
                 args.start_epoch = checkpoint['epoch']
             best_acc1 = checkpoint['best_acc1']
@@ -207,6 +209,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
     cudnn.benchmark = True
 
+    # generate the pruning operator for each stage
     global admm_op
     if args.prune == 'admm':
         percentages = admm.gen_percentages(model, args.arch)
@@ -215,6 +218,8 @@ def main_worker(gpu, ngpus_per_node, args):
         percentages = admm.gen_percentages(model, args.arch)
         admm_op = admm.retrain_op(model, percentages)
         admm_op.apply_mask()
+    else:
+        raise Exception ("Please specify the prune stage: admm | retrain")
 
     # Data loading code
     traindir = os.path.join(args.data, 'train')
@@ -271,6 +276,7 @@ def main_worker(gpu, ngpus_per_node, args):
         is_best = acc1 > best_acc1
         best_acc1 = max(acc1, best_acc1)
 
+        # In ADMM pruning, we only save the checkpoint but not the Best.
         if args.prune == 'admm' or args.prune == 'retrain':
             subprocess.call('mkdir -p saved_models/', shell=True)
             save_checkpoint({
@@ -306,6 +312,7 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
     model.train()
 
     if args.prune == 'admm':
+        # For every #admm_iter epochs, we update the W, Z, U
         admm_op.update(epoch)
         admm_op.print_info()
     elif args.prune == 'retrain':
@@ -334,11 +341,13 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
         optimizer.zero_grad()
         loss.backward()
 
+        # apply the pho/2*|W-Z+U|^2 regularization
         if args.prune == 'admm':
             admm_op.loss_grad()
 
         optimizer.step()
 
+        # apply the pruning mask
         if args.prune == 'retrain':
             admm_op.apply_mask()
 

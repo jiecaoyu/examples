@@ -2,6 +2,11 @@ from __future__ import absolute_import, division, print_function
 
 
 def gen_percentages(model, arch):
+    # This function is used to generate the target sparsity for
+    # specific network. Here I am using AlexNet as an example.
+    # It needs to be extended to support more networks. And a
+    # smart method to determine the sparsity of each layer should
+    # be defined.
     if arch == 'alexnet':
         # mannually define the sparsities
         percentages_dict = {
@@ -20,7 +25,16 @@ def gen_percentages(model, arch):
     return None
 
 class admm_op():
+    #
+    # The operator for ADMM stage of the pruning process.
+    #
     def __init__(self, model, percentages, admm_iter, pho):
+        #
+        # Params:
+        #     percentages: list of target sparsity for each layer
+        #     admm_iter: admm is performed every #admm_iter epochs
+        #     pho: pho value
+        #
         self.model = model
         self.W = []
         self.U = []
@@ -37,6 +51,9 @@ class admm_op():
         return
 
     def update(self, epoch):
+        #
+        # This func is for updating W, U and Z tensors.
+        #
         if epoch % self.admm_iter == 0:
             print('\n!!! Updating U,Z ...')
             for index in range(len(self.W)):
@@ -54,6 +71,7 @@ class admm_op():
 
                 # update U
                 if epoch > 0:
+                    # For epoch = 0, U is fixed to all zero.
                     self.U[index] = self.U[index] + self.W[index].data - self.Z[index]
 
                 target_mask_sum = \
@@ -64,6 +82,12 @@ class admm_op():
         return
 
     def print_info(self):
+        #
+        # Print the necessary information through the ADMM process:
+        #     target_sparsity: the target sparsity for each layer/network
+        #     small_sparsity: to monitor how sparse the current weight is, I define
+        #                     the small_sparsity to be percentage of |weight| < 1e-3
+        #
         print('\n' + '-' * 30)
         total_W_Z_error = 0.
         total_small = 0
@@ -94,17 +118,25 @@ class admm_op():
         return
 
     def loss_grad(self):
+        #
+        # The regularization of term pho/2*|W-Z+U|^2 is applied in a similar way
+        # of how PyTorch implements L2-Norm weight decay.
+        #
         for index in range(len(self.W)):
             grad = self.W[index].data.sub(self.Z[index]).add(self.U[index])
             grad = grad.mul(self.pho)
             self.W[index].grad.data += grad
 
 class retrain_op():
+    #
+    # The operator for RETRAIN stage of the pruning process.
+    #
     def __init__(self, model, percentages):
         self.model = model
         self.percentages = []
         self.W = []
         self.mask = []
+        # generate the mask list
         for key, value in model.named_parameters():
             if key in percentages:
                 self.W.append(value)
@@ -119,11 +151,13 @@ class retrain_op():
         return
 
     def apply_mask(self):
+        # apply the mask for each layer
         for index in range(len(self.W)):
             self.W[index].data = self.W[index].data.mul(self.mask[index])
         return
 
     def print_info(self):
+        # print the sparsity info for each layer/network
         print('\n' + '-' * 30)
         pruned_total = 0
         weight_total = 0
