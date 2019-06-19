@@ -1,0 +1,471 @@
+Namespace(admm_iter=10, arch='resnet18', batch_size=256, data='/data2/jiecaoyu/imagenet/imgs/', dist_backend='nccl', dist_url='tcp://224.66.41.62:23456', epochs=375, evaluate=False, gpu=None, lr=0.01, lr_epochs=400, momentum=0.9, multiprocessing_distributed=False, pho=0.001, pretrained=True, print_freq=10, prune='admm', prune_ratio=0.85, rank=-1, resume='', seed=None, start_epoch=0, weight_decay=0.0001, workers=16, world_size=-1)
+=> using pre-trained model 'resnet18'
+Current LR: 0.01
+
+!!! Updating U,Z ...
+[  0] target_mask_sum:     0.000
+[  1] target_mask_sum:     0.000
+[  2] target_mask_sum:     0.000
+[  3] target_mask_sum:     0.000
+[  4] target_mask_sum:     0.000
+[  5] target_mask_sum:     0.000
+[  6] target_mask_sum:     0.000
+[  7] target_mask_sum:     0.000
+[  8] target_mask_sum:     0.000
+[  9] target_mask_sum:     0.000
+[ 10] target_mask_sum:     0.000
+[ 11] target_mask_sum:     0.000
+[ 12] target_mask_sum:     0.000
+[ 13] target_mask_sum:     0.000
+[ 14] target_mask_sum:     0.000
+[ 15] target_mask_sum:     0.000
+[ 16] target_mask_sum:     0.000
+[ 17] target_mask_sum:     0.000
+[ 18] target_mask_sum:     0.000
+[ 19] target_mask_sum:     0.000
+[ 20] target_mask_sum:     0.000
+
+
+
+------------------------------
+pho: 0.001
+[  0] shape: torch.Size([64, 3, 7, 7])     	 W_Z_error:     0.000 target_sparsity:   0.000 small_sparsity:   0.137
+[  1] shape: torch.Size([64, 64, 3, 3])    	 W_Z_error:    27.091 target_sparsity:   0.904 small_sparsity:   0.147
+[  2] shape: torch.Size([64, 64, 3, 3])    	 W_Z_error:    29.948 target_sparsity:   0.904 small_sparsity:   0.026
+[  3] shape: torch.Size([64, 64, 3, 3])    	 W_Z_error:    32.722 target_sparsity:   0.904 small_sparsity:   0.025
+[  4] shape: torch.Size([64, 64, 3, 3])    	 W_Z_error:    29.214 target_sparsity:   0.904 small_sparsity:   0.025
+[  5] shape: torch.Size([128, 64, 3, 3])   	 W_Z_error:    50.265 target_sparsity:   0.904 small_sparsity:   0.027
+[  6] shape: torch.Size([128, 128, 3, 3])  	 W_Z_error:    65.622 target_sparsity:   0.904 small_sparsity:   0.031
+[  7] shape: torch.Size([128, 64, 1, 1])   	 W_Z_error:     0.000 target_sparsity:   0.000 small_sparsity:   0.019
+[  8] shape: torch.Size([128, 128, 3, 3])  	 W_Z_error:    68.179 target_sparsity:   0.904 small_sparsity:   0.031
+[  9] shape: torch.Size([128, 128, 3, 3])  	 W_Z_error:    60.106 target_sparsity:   0.904 small_sparsity:   0.032
+[ 10] shape: torch.Size([256, 128, 3, 3])  	 W_Z_error:   103.440 target_sparsity:   0.904 small_sparsity:   0.035
+[ 11] shape: torch.Size([256, 256, 3, 3])  	 W_Z_error:   161.669 target_sparsity:   0.904 small_sparsity:   0.039
+[ 12] shape: torch.Size([256, 128, 1, 1])  	 W_Z_error:     0.000 target_sparsity:   0.000 small_sparsity:   0.032
+[ 13] shape: torch.Size([256, 256, 3, 3])  	 W_Z_error:   134.862 target_sparsity:   0.904 small_sparsity:   0.042
+[ 14] shape: torch.Size([256, 256, 3, 3])  	 W_Z_error:   118.784 target_sparsity:   0.904 small_sparsity:   0.045
+[ 15] shape: torch.Size([512, 256, 3, 3])  	 W_Z_error:   232.318 target_sparsity:   0.904 small_sparsity:   0.044
+[ 16] shape: torch.Size([512, 512, 3, 3])  	 W_Z_error:   363.012 target_sparsity:   0.904 small_sparsity:   0.050
+[ 17] shape: torch.Size([512, 256, 1, 1])  	 W_Z_error:     0.000 target_sparsity:   0.000 small_sparsity:   0.030
+[ 18] shape: torch.Size([512, 512, 3, 3])  	 W_Z_error:   405.821 target_sparsity:   0.904 small_sparsity:   0.047
+[ 19] shape: torch.Size([512, 512, 3, 3])  	 W_Z_error:   204.203 target_sparsity:   0.904 small_sparsity:   0.066
+[ 20] shape: torch.Size([1000, 512])       	 W_Z_error:     0.000 target_sparsity:   0.000 small_sparsity:   0.013
+
+[Total] W_Z_error: 2087.256 target_sparsity:   0.850 small_sparsity:   0.048
+
+------------------------------
+
+Epoch: [0][   0/5005]	Time 10.877 (10.877)	Data  2.761 ( 2.761)	Loss 1.8136e+00 (1.8136e+00)	Acc@1  57.81 ( 57.81)	Acc@5  80.86 ( 80.86)
+Epoch: [0][  10/5005]	Time  0.221 ( 1.185)	Data  0.000 ( 0.251)	Loss 1.5708e+00 (1.5471e+00)	Acc@1  65.23 ( 64.49)	Acc@5  82.03 ( 84.30)
+Epoch: [0][  20/5005]	Time  0.226 ( 0.729)	Data  0.000 ( 0.138)	Loss 1.9218e+00 (1.6045e+00)	Acc@1  56.25 ( 62.91)	Acc@5  77.34 ( 83.33)
+Epoch: [0][  30/5005]	Time  0.244 ( 0.570)	Data  0.000 ( 0.098)	Loss 1.6177e+00 (1.6224e+00)	Acc@1  63.28 ( 62.50)	Acc@5  83.59 ( 83.00)
+Epoch: [0][  40/5005]	Time  0.272 ( 0.492)	Data  0.000 ( 0.078)	Loss 1.7730e+00 (1.6297e+00)	Acc@1  58.59 ( 62.02)	Acc@5  80.47 ( 82.94)
+Epoch: [0][  50/5005]	Time  0.245 ( 0.443)	Data  0.000 ( 0.065)	Loss 1.6490e+00 (1.6481e+00)	Acc@1  61.33 ( 61.73)	Acc@5  83.20 ( 82.67)
+Epoch: [0][  60/5005]	Time  0.244 ( 0.411)	Data  0.000 ( 0.057)	Loss 1.5439e+00 (1.6611e+00)	Acc@1  66.41 ( 61.48)	Acc@5  84.77 ( 82.49)
+Epoch: [0][  70/5005]	Time  0.245 ( 0.388)	Data  0.000 ( 0.051)	Loss 1.7860e+00 (1.6758e+00)	Acc@1  56.25 ( 61.15)	Acc@5  77.73 ( 82.19)
+Epoch: [0][  80/5005]	Time  0.248 ( 0.371)	Data  0.000 ( 0.046)	Loss 1.6455e+00 (1.6820e+00)	Acc@1  61.33 ( 61.05)	Acc@5  83.20 ( 82.19)
+Epoch: [0][  90/5005]	Time  0.240 ( 0.357)	Data  0.000 ( 0.043)	Loss 1.7407e+00 (1.6892e+00)	Acc@1  59.77 ( 61.01)	Acc@5  80.86 ( 82.09)
+Epoch: [0][ 100/5005]	Time  0.244 ( 0.346)	Data  0.000 ( 0.040)	Loss 1.7233e+00 (1.7034e+00)	Acc@1  59.77 ( 60.72)	Acc@5  83.20 ( 81.86)
+Epoch: [0][ 110/5005]	Time  0.249 ( 0.337)	Data  0.000 ( 0.038)	Loss 1.7113e+00 (1.7069e+00)	Acc@1  62.50 ( 60.69)	Acc@5  80.86 ( 81.80)
+Epoch: [0][ 120/5005]	Time  0.244 ( 0.330)	Data  0.000 ( 0.036)	Loss 1.6145e+00 (1.7122e+00)	Acc@1  62.50 ( 60.69)	Acc@5  83.20 ( 81.74)
+Epoch: [0][ 130/5005]	Time  0.246 ( 0.324)	Data  0.000 ( 0.035)	Loss 1.8191e+00 (1.7177e+00)	Acc@1  55.47 ( 60.48)	Acc@5  80.47 ( 81.66)
+Epoch: [0][ 140/5005]	Time  0.242 ( 0.319)	Data  0.000 ( 0.033)	Loss 1.8377e+00 (1.7262e+00)	Acc@1  58.59 ( 60.37)	Acc@5  80.47 ( 81.53)
+Epoch: [0][ 150/5005]	Time  0.242 ( 0.314)	Data  0.000 ( 0.032)	Loss 1.7797e+00 (1.7313e+00)	Acc@1  54.69 ( 60.22)	Acc@5  81.64 ( 81.45)
+Epoch: [0][ 160/5005]	Time  0.243 ( 0.310)	Data  0.000 ( 0.031)	Loss 1.9311e+00 (1.7380e+00)	Acc@1  55.08 ( 60.01)	Acc@5  77.73 ( 81.39)
+Epoch: [0][ 170/5005]	Time  0.246 ( 0.306)	Data  0.000 ( 0.030)	Loss 2.0415e+00 (1.7453e+00)	Acc@1  53.52 ( 59.83)	Acc@5  75.39 ( 81.30)
+Epoch: [0][ 180/5005]	Time  0.245 ( 0.303)	Data  0.000 ( 0.029)	Loss 1.9901e+00 (1.7442e+00)	Acc@1  52.73 ( 59.80)	Acc@5  78.52 ( 81.30)
+Epoch: [0][ 190/5005]	Time  0.245 ( 0.300)	Data  0.000 ( 0.029)	Loss 2.0327e+00 (1.7511e+00)	Acc@1  53.91 ( 59.73)	Acc@5  76.17 ( 81.18)
+Epoch: [0][ 200/5005]	Time  0.246 ( 0.298)	Data  0.000 ( 0.028)	Loss 1.8241e+00 (1.7538e+00)	Acc@1  57.42 ( 59.63)	Acc@5  80.86 ( 81.15)
+Epoch: [0][ 210/5005]	Time  0.246 ( 0.295)	Data  0.000 ( 0.027)	Loss 1.8770e+00 (1.7553e+00)	Acc@1  55.47 ( 59.62)	Acc@5  77.73 ( 81.11)
+Epoch: [0][ 220/5005]	Time  0.241 ( 0.293)	Data  0.000 ( 0.027)	Loss 1.8691e+00 (1.7582e+00)	Acc@1  54.30 ( 59.59)	Acc@5  80.47 ( 81.10)
+Epoch: [0][ 230/5005]	Time  0.248 ( 0.291)	Data  0.000 ( 0.026)	Loss 1.7155e+00 (1.7625e+00)	Acc@1  61.33 ( 59.52)	Acc@5  81.64 ( 81.06)
+Epoch: [0][ 240/5005]	Time  0.243 ( 0.289)	Data  0.000 ( 0.026)	Loss 1.6279e+00 (1.7584e+00)	Acc@1  59.38 ( 59.56)	Acc@5  82.42 ( 81.10)
+Epoch: [0][ 250/5005]	Time  0.244 ( 0.288)	Data  0.000 ( 0.025)	Loss 1.6767e+00 (1.7582e+00)	Acc@1  62.11 ( 59.58)	Acc@5  81.25 ( 81.14)
+Epoch: [0][ 260/5005]	Time  0.244 ( 0.286)	Data  0.000 ( 0.025)	Loss 1.8801e+00 (1.7607e+00)	Acc@1  60.94 ( 59.56)	Acc@5  78.12 ( 81.08)
+Epoch: [0][ 270/5005]	Time  0.246 ( 0.285)	Data  0.000 ( 0.025)	Loss 1.7620e+00 (1.7635e+00)	Acc@1  55.86 ( 59.49)	Acc@5  80.47 ( 81.01)
+Epoch: [0][ 280/5005]	Time  0.244 ( 0.283)	Data  0.000 ( 0.024)	Loss 1.5883e+00 (1.7665e+00)	Acc@1  63.28 ( 59.44)	Acc@5  82.81 ( 80.99)
+Epoch: [0][ 290/5005]	Time  0.246 ( 0.282)	Data  0.000 ( 0.024)	Loss 1.8645e+00 (1.7651e+00)	Acc@1  57.81 ( 59.46)	Acc@5  78.12 ( 81.01)
+Epoch: [0][ 300/5005]	Time  0.249 ( 0.281)	Data  0.000 ( 0.024)	Loss 1.9925e+00 (1.7658e+00)	Acc@1  55.08 ( 59.44)	Acc@5  79.30 ( 81.00)
+Epoch: [0][ 310/5005]	Time  0.246 ( 0.280)	Data  0.000 ( 0.023)	Loss 1.7098e+00 (1.7678e+00)	Acc@1  62.11 ( 59.40)	Acc@5  84.38 ( 81.01)
+Epoch: [0][ 320/5005]	Time  0.244 ( 0.279)	Data  0.000 ( 0.023)	Loss 1.9839e+00 (1.7695e+00)	Acc@1  54.69 ( 59.35)	Acc@5  80.08 ( 80.98)
+Epoch: [0][ 330/5005]	Time  0.246 ( 0.278)	Data  0.000 ( 0.023)	Loss 1.9702e+00 (1.7684e+00)	Acc@1  57.81 ( 59.36)	Acc@5  79.69 ( 81.03)
+Epoch: [0][ 340/5005]	Time  0.244 ( 0.277)	Data  0.000 ( 0.023)	Loss 1.8049e+00 (1.7690e+00)	Acc@1  63.67 ( 59.34)	Acc@5  82.42 ( 81.03)
+Epoch: [0][ 350/5005]	Time  0.246 ( 0.276)	Data  0.000 ( 0.022)	Loss 1.7733e+00 (1.7704e+00)	Acc@1  60.16 ( 59.29)	Acc@5  80.47 ( 81.01)
+Epoch: [0][ 360/5005]	Time  0.249 ( 0.276)	Data  0.000 ( 0.022)	Loss 1.9971e+00 (1.7718e+00)	Acc@1  53.52 ( 59.25)	Acc@5  79.30 ( 80.99)
+Epoch: [0][ 370/5005]	Time  0.249 ( 0.275)	Data  0.000 ( 0.022)	Loss 1.9932e+00 (1.7725e+00)	Acc@1  55.47 ( 59.22)	Acc@5  78.52 ( 80.97)
+Epoch: [0][ 380/5005]	Time  0.247 ( 0.274)	Data  0.000 ( 0.022)	Loss 1.7803e+00 (1.7729e+00)	Acc@1  54.69 ( 59.20)	Acc@5  81.25 ( 80.98)
+Epoch: [0][ 390/5005]	Time  0.245 ( 0.273)	Data  0.000 ( 0.022)	Loss 1.7836e+00 (1.7727e+00)	Acc@1  56.64 ( 59.20)	Acc@5  80.86 ( 80.98)
+Epoch: [0][ 400/5005]	Time  0.230 ( 0.273)	Data  0.000 ( 0.022)	Loss 1.9614e+00 (1.7751e+00)	Acc@1  49.22 ( 59.14)	Acc@5  82.42 ( 80.95)
+Epoch: [0][ 410/5005]	Time  0.245 ( 0.272)	Data  0.000 ( 0.021)	Loss 1.8247e+00 (1.7757e+00)	Acc@1  55.08 ( 59.12)	Acc@5  79.69 ( 80.95)
+Epoch: [0][ 420/5005]	Time  0.247 ( 0.272)	Data  0.000 ( 0.021)	Loss 1.9875e+00 (1.7778e+00)	Acc@1  58.98 ( 59.09)	Acc@5  76.17 ( 80.91)
+Epoch: [0][ 430/5005]	Time  0.247 ( 0.271)	Data  0.000 ( 0.021)	Loss 1.7375e+00 (1.7793e+00)	Acc@1  58.98 ( 59.06)	Acc@5  83.20 ( 80.90)
+Epoch: [0][ 440/5005]	Time  0.247 ( 0.271)	Data  0.000 ( 0.021)	Loss 1.8706e+00 (1.7801e+00)	Acc@1  56.64 ( 59.06)	Acc@5  74.22 ( 80.88)
+Epoch: [0][ 450/5005]	Time  0.248 ( 0.270)	Data  0.000 ( 0.021)	Loss 1.8334e+00 (1.7801e+00)	Acc@1  58.59 ( 59.05)	Acc@5  80.08 ( 80.86)
+Epoch: [0][ 460/5005]	Time  0.247 ( 0.270)	Data  0.000 ( 0.021)	Loss 1.9762e+00 (1.7792e+00)	Acc@1  56.64 ( 59.08)	Acc@5  78.12 ( 80.88)
+Epoch: [0][ 470/5005]	Time  0.242 ( 0.269)	Data  0.000 ( 0.021)	Loss 1.7425e+00 (1.7792e+00)	Acc@1  60.55 ( 59.09)	Acc@5  82.03 ( 80.88)
+Epoch: [0][ 480/5005]	Time  0.243 ( 0.269)	Data  0.000 ( 0.021)	Loss 1.6705e+00 (1.7820e+00)	Acc@1  62.50 ( 59.03)	Acc@5  82.03 ( 80.84)
+Epoch: [0][ 490/5005]	Time  0.245 ( 0.268)	Data  0.000 ( 0.020)	Loss 1.8276e+00 (1.7847e+00)	Acc@1  57.42 ( 58.97)	Acc@5  82.42 ( 80.81)
+Epoch: [0][ 500/5005]	Time  0.245 ( 0.268)	Data  0.000 ( 0.020)	Loss 1.7879e+00 (1.7848e+00)	Acc@1  62.11 ( 58.97)	Acc@5  80.86 ( 80.80)
+Epoch: [0][ 510/5005]	Time  0.252 ( 0.268)	Data  0.000 ( 0.020)	Loss 2.0269e+00 (1.7862e+00)	Acc@1  53.52 ( 58.96)	Acc@5  76.56 ( 80.77)
+Epoch: [0][ 520/5005]	Time  0.259 ( 0.267)	Data  0.000 ( 0.020)	Loss 2.0193e+00 (1.7871e+00)	Acc@1  51.95 ( 58.95)	Acc@5  75.78 ( 80.75)
+Epoch: [0][ 530/5005]	Time  0.238 ( 0.267)	Data  0.000 ( 0.020)	Loss 2.0386e+00 (1.7887e+00)	Acc@1  52.73 ( 58.90)	Acc@5  75.78 ( 80.72)
+Epoch: [0][ 540/5005]	Time  0.246 ( 0.266)	Data  0.000 ( 0.020)	Loss 1.9257e+00 (1.7890e+00)	Acc@1  56.64 ( 58.89)	Acc@5  78.12 ( 80.70)
+Epoch: [0][ 550/5005]	Time  0.246 ( 0.266)	Data  0.000 ( 0.020)	Loss 2.0085e+00 (1.7895e+00)	Acc@1  52.34 ( 58.87)	Acc@5  76.17 ( 80.70)
+Epoch: [0][ 560/5005]	Time  0.250 ( 0.266)	Data  0.000 ( 0.020)	Loss 1.8599e+00 (1.7916e+00)	Acc@1  58.20 ( 58.83)	Acc@5  79.30 ( 80.66)
+Epoch: [0][ 570/5005]	Time  0.245 ( 0.265)	Data  0.000 ( 0.020)	Loss 1.8126e+00 (1.7917e+00)	Acc@1  56.64 ( 58.82)	Acc@5  79.69 ( 80.67)
+Epoch: [0][ 580/5005]	Time  0.248 ( 0.265)	Data  0.000 ( 0.020)	Loss 1.6783e+00 (1.7918e+00)	Acc@1  59.77 ( 58.84)	Acc@5  81.25 ( 80.66)
+Epoch: [0][ 590/5005]	Time  0.245 ( 0.265)	Data  0.000 ( 0.020)	Loss 1.9507e+00 (1.7928e+00)	Acc@1  55.47 ( 58.80)	Acc@5  77.73 ( 80.64)
+Epoch: [0][ 600/5005]	Time  0.242 ( 0.265)	Data  0.000 ( 0.019)	Loss 1.7235e+00 (1.7927e+00)	Acc@1  59.38 ( 58.78)	Acc@5  80.86 ( 80.65)
+Epoch: [0][ 610/5005]	Time  0.247 ( 0.264)	Data  0.000 ( 0.019)	Loss 1.7271e+00 (1.7933e+00)	Acc@1  62.50 ( 58.77)	Acc@5  82.42 ( 80.64)
+Epoch: [0][ 620/5005]	Time  0.247 ( 0.264)	Data  0.000 ( 0.019)	Loss 1.9854e+00 (1.7940e+00)	Acc@1  55.86 ( 58.74)	Acc@5  76.17 ( 80.64)
+Epoch: [0][ 630/5005]	Time  0.246 ( 0.264)	Data  0.000 ( 0.019)	Loss 1.6531e+00 (1.7951e+00)	Acc@1  60.16 ( 58.71)	Acc@5  81.64 ( 80.62)
+Epoch: [0][ 640/5005]	Time  0.243 ( 0.264)	Data  0.000 ( 0.019)	Loss 2.1260e+00 (1.7970e+00)	Acc@1  53.52 ( 58.69)	Acc@5  76.56 ( 80.59)
+Epoch: [0][ 650/5005]	Time  0.252 ( 0.263)	Data  0.000 ( 0.019)	Loss 1.7992e+00 (1.7983e+00)	Acc@1  57.81 ( 58.67)	Acc@5  82.42 ( 80.57)
+Epoch: [0][ 660/5005]	Time  0.247 ( 0.263)	Data  0.000 ( 0.019)	Loss 1.9086e+00 (1.7987e+00)	Acc@1  57.42 ( 58.67)	Acc@5  78.52 ( 80.56)
+Epoch: [0][ 670/5005]	Time  0.244 ( 0.263)	Data  0.000 ( 0.019)	Loss 1.9692e+00 (1.7997e+00)	Acc@1  56.25 ( 58.65)	Acc@5  78.91 ( 80.55)
+Epoch: [0][ 680/5005]	Time  0.244 ( 0.263)	Data  0.000 ( 0.019)	Loss 1.7561e+00 (1.8012e+00)	Acc@1  57.81 ( 58.62)	Acc@5  81.25 ( 80.53)
+Epoch: [0][ 690/5005]	Time  0.247 ( 0.262)	Data  0.000 ( 0.019)	Loss 1.8743e+00 (1.8016e+00)	Acc@1  58.59 ( 58.61)	Acc@5  79.30 ( 80.52)
+Epoch: [0][ 700/5005]	Time  0.248 ( 0.262)	Data  0.000 ( 0.019)	Loss 2.0342e+00 (1.8024e+00)	Acc@1  57.81 ( 58.60)	Acc@5  75.39 ( 80.51)
+Epoch: [0][ 710/5005]	Time  0.249 ( 0.262)	Data  0.000 ( 0.019)	Loss 1.7349e+00 (1.8028e+00)	Acc@1  59.38 ( 58.59)	Acc@5  82.03 ( 80.50)
+Epoch: [0][ 720/5005]	Time  0.234 ( 0.262)	Data  0.000 ( 0.019)	Loss 1.9693e+00 (1.8034e+00)	Acc@1  53.12 ( 58.57)	Acc@5  76.95 ( 80.49)
+Epoch: [0][ 730/5005]	Time  0.252 ( 0.262)	Data  0.000 ( 0.019)	Loss 1.8579e+00 (1.8031e+00)	Acc@1  57.81 ( 58.58)	Acc@5  80.08 ( 80.49)
+Epoch: [0][ 740/5005]	Time  0.239 ( 0.262)	Data  0.000 ( 0.019)	Loss 1.7920e+00 (1.8031e+00)	Acc@1  60.94 ( 58.58)	Acc@5  80.47 ( 80.49)
+Epoch: [0][ 750/5005]	Time  0.241 ( 0.261)	Data  0.000 ( 0.019)	Loss 1.8194e+00 (1.8036e+00)	Acc@1  57.81 ( 58.56)	Acc@5  80.47 ( 80.48)
+Epoch: [0][ 760/5005]	Time  0.271 ( 0.261)	Data  0.000 ( 0.019)	Loss 1.9790e+00 (1.8039e+00)	Acc@1  55.08 ( 58.54)	Acc@5  75.78 ( 80.47)
+Epoch: [0][ 770/5005]	Time  0.247 ( 0.261)	Data  0.000 ( 0.018)	Loss 1.9410e+00 (1.8045e+00)	Acc@1  56.64 ( 58.52)	Acc@5  78.52 ( 80.46)
+Epoch: [0][ 780/5005]	Time  0.249 ( 0.261)	Data  0.000 ( 0.018)	Loss 1.8658e+00 (1.8052e+00)	Acc@1  58.20 ( 58.52)	Acc@5  78.91 ( 80.46)
+Epoch: [0][ 790/5005]	Time  0.247 ( 0.261)	Data  0.000 ( 0.018)	Loss 1.6898e+00 (1.8053e+00)	Acc@1  60.55 ( 58.52)	Acc@5  82.81 ( 80.47)
+Epoch: [0][ 800/5005]	Time  0.249 ( 0.261)	Data  0.000 ( 0.018)	Loss 1.9255e+00 (1.8068e+00)	Acc@1  53.52 ( 58.47)	Acc@5  78.52 ( 80.46)
+Epoch: [0][ 810/5005]	Time  0.244 ( 0.260)	Data  0.000 ( 0.018)	Loss 2.1513e+00 (1.8076e+00)	Acc@1  53.91 ( 58.44)	Acc@5  79.30 ( 80.46)
+Epoch: [0][ 820/5005]	Time  0.246 ( 0.260)	Data  0.000 ( 0.018)	Loss 1.8421e+00 (1.8084e+00)	Acc@1  57.42 ( 58.41)	Acc@5  80.86 ( 80.45)
+Epoch: [0][ 830/5005]	Time  0.242 ( 0.260)	Data  0.000 ( 0.018)	Loss 1.7702e+00 (1.8097e+00)	Acc@1  58.20 ( 58.39)	Acc@5  82.03 ( 80.43)
+Epoch: [0][ 840/5005]	Time  0.248 ( 0.260)	Data  0.000 ( 0.018)	Loss 1.7516e+00 (1.8097e+00)	Acc@1  56.64 ( 58.39)	Acc@5  80.86 ( 80.44)
+Epoch: [0][ 850/5005]	Time  0.247 ( 0.260)	Data  0.000 ( 0.018)	Loss 1.9477e+00 (1.8101e+00)	Acc@1  54.69 ( 58.37)	Acc@5  78.12 ( 80.44)
+Epoch: [0][ 860/5005]	Time  0.244 ( 0.260)	Data  0.000 ( 0.018)	Loss 1.8244e+00 (1.8109e+00)	Acc@1  56.64 ( 58.35)	Acc@5  78.91 ( 80.42)
+Epoch: [0][ 870/5005]	Time  0.248 ( 0.260)	Data  0.000 ( 0.018)	Loss 1.8021e+00 (1.8113e+00)	Acc@1  61.72 ( 58.35)	Acc@5  79.69 ( 80.42)
+Epoch: [0][ 880/5005]	Time  0.245 ( 0.260)	Data  0.000 ( 0.018)	Loss 1.9048e+00 (1.8111e+00)	Acc@1  52.73 ( 58.35)	Acc@5  76.56 ( 80.42)
+Epoch: [0][ 890/5005]	Time  0.248 ( 0.259)	Data  0.000 ( 0.018)	Loss 1.5441e+00 (1.8115e+00)	Acc@1  66.80 ( 58.35)	Acc@5  84.77 ( 80.42)
+Epoch: [0][ 900/5005]	Time  0.248 ( 0.259)	Data  0.000 ( 0.018)	Loss 1.8782e+00 (1.8119e+00)	Acc@1  59.38 ( 58.36)	Acc@5  75.78 ( 80.41)
+Epoch: [0][ 910/5005]	Time  0.241 ( 0.259)	Data  0.000 ( 0.018)	Loss 1.8777e+00 (1.8117e+00)	Acc@1  57.42 ( 58.36)	Acc@5  79.69 ( 80.41)
+Epoch: [0][ 920/5005]	Time  0.246 ( 0.259)	Data  0.000 ( 0.018)	Loss 1.9224e+00 (1.8125e+00)	Acc@1  53.91 ( 58.34)	Acc@5  78.91 ( 80.40)
+Epoch: [0][ 930/5005]	Time  0.252 ( 0.259)	Data  0.000 ( 0.018)	Loss 1.9739e+00 (1.8122e+00)	Acc@1  55.47 ( 58.35)	Acc@5  75.78 ( 80.41)
+Epoch: [0][ 940/5005]	Time  0.247 ( 0.259)	Data  0.000 ( 0.018)	Loss 1.8764e+00 (1.8117e+00)	Acc@1  55.08 ( 58.34)	Acc@5  76.56 ( 80.42)
+Epoch: [0][ 950/5005]	Time  0.245 ( 0.259)	Data  0.000 ( 0.018)	Loss 1.7649e+00 (1.8121e+00)	Acc@1  59.77 ( 58.33)	Acc@5  82.42 ( 80.42)
+Epoch: [0][ 960/5005]	Time  0.248 ( 0.259)	Data  0.000 ( 0.018)	Loss 1.8528e+00 (1.8130e+00)	Acc@1  56.64 ( 58.32)	Acc@5  79.69 ( 80.41)
+Epoch: [0][ 970/5005]	Time  0.247 ( 0.258)	Data  0.000 ( 0.018)	Loss 1.8637e+00 (1.8133e+00)	Acc@1  58.98 ( 58.31)	Acc@5  77.34 ( 80.41)
+Epoch: [0][ 980/5005]	Time  0.245 ( 0.258)	Data  0.000 ( 0.018)	Loss 1.7773e+00 (1.8134e+00)	Acc@1  61.33 ( 58.30)	Acc@5  80.47 ( 80.41)
+Epoch: [0][ 990/5005]	Time  0.245 ( 0.258)	Data  0.000 ( 0.018)	Loss 1.7212e+00 (1.8130e+00)	Acc@1  57.03 ( 58.30)	Acc@5  81.25 ( 80.42)
+Epoch: [0][1000/5005]	Time  0.248 ( 0.258)	Data  0.000 ( 0.018)	Loss 1.7347e+00 (1.8134e+00)	Acc@1  58.59 ( 58.30)	Acc@5  83.98 ( 80.42)
+Epoch: [0][1010/5005]	Time  0.250 ( 0.258)	Data  0.000 ( 0.018)	Loss 1.9323e+00 (1.8140e+00)	Acc@1  57.03 ( 58.29)	Acc@5  79.69 ( 80.41)
+Epoch: [0][1020/5005]	Time  0.252 ( 0.258)	Data  0.000 ( 0.018)	Loss 1.6360e+00 (1.8144e+00)	Acc@1  60.94 ( 58.28)	Acc@5  84.38 ( 80.40)
+Epoch: [0][1030/5005]	Time  0.242 ( 0.258)	Data  0.000 ( 0.018)	Loss 1.7194e+00 (1.8145e+00)	Acc@1  59.77 ( 58.27)	Acc@5  85.55 ( 80.41)
+Epoch: [0][1040/5005]	Time  0.243 ( 0.258)	Data  0.000 ( 0.018)	Loss 1.8446e+00 (1.8147e+00)	Acc@1  54.69 ( 58.26)	Acc@5  82.03 ( 80.41)
+Epoch: [0][1050/5005]	Time  0.253 ( 0.258)	Data  0.000 ( 0.018)	Loss 1.9501e+00 (1.8152e+00)	Acc@1  54.69 ( 58.24)	Acc@5  81.25 ( 80.41)
+Epoch: [0][1060/5005]	Time  0.242 ( 0.258)	Data  0.000 ( 0.018)	Loss 2.1183e+00 (1.8157e+00)	Acc@1  51.56 ( 58.23)	Acc@5  78.52 ( 80.41)
+Epoch: [0][1070/5005]	Time  0.244 ( 0.257)	Data  0.000 ( 0.018)	Loss 1.9124e+00 (1.8166e+00)	Acc@1  59.77 ( 58.21)	Acc@5  76.95 ( 80.39)
+Epoch: [0][1080/5005]	Time  0.242 ( 0.257)	Data  0.000 ( 0.018)	Loss 1.9686e+00 (1.8173e+00)	Acc@1  54.69 ( 58.19)	Acc@5  78.12 ( 80.38)
+Epoch: [0][1090/5005]	Time  0.246 ( 0.257)	Data  0.000 ( 0.018)	Loss 1.7009e+00 (1.8174e+00)	Acc@1  60.16 ( 58.19)	Acc@5  78.91 ( 80.38)
+Epoch: [0][1100/5005]	Time  0.266 ( 0.257)	Data  0.000 ( 0.017)	Loss 2.1118e+00 (1.8173e+00)	Acc@1  53.12 ( 58.20)	Acc@5  76.95 ( 80.38)
+Epoch: [0][1110/5005]	Time  0.246 ( 0.257)	Data  0.000 ( 0.017)	Loss 1.7418e+00 (1.8172e+00)	Acc@1  57.03 ( 58.20)	Acc@5  82.03 ( 80.38)
+Epoch: [0][1120/5005]	Time  0.243 ( 0.257)	Data  0.000 ( 0.017)	Loss 1.9639e+00 (1.8170e+00)	Acc@1  54.69 ( 58.20)	Acc@5  80.08 ( 80.39)
+Epoch: [0][1130/5005]	Time  0.245 ( 0.257)	Data  0.000 ( 0.017)	Loss 1.8842e+00 (1.8173e+00)	Acc@1  56.64 ( 58.20)	Acc@5  79.69 ( 80.39)
+Epoch: [0][1140/5005]	Time  0.246 ( 0.257)	Data  0.000 ( 0.017)	Loss 1.5450e+00 (1.8179e+00)	Acc@1  62.11 ( 58.19)	Acc@5  84.77 ( 80.38)
+Epoch: [0][1150/5005]	Time  0.263 ( 0.257)	Data  0.000 ( 0.017)	Loss 1.9959e+00 (1.8182e+00)	Acc@1  53.52 ( 58.19)	Acc@5  78.12 ( 80.37)
+Epoch: [0][1160/5005]	Time  0.249 ( 0.257)	Data  0.000 ( 0.017)	Loss 1.8026e+00 (1.8186e+00)	Acc@1  58.59 ( 58.19)	Acc@5  82.03 ( 80.37)
+Epoch: [0][1170/5005]	Time  0.245 ( 0.257)	Data  0.000 ( 0.017)	Loss 2.0954e+00 (1.8190e+00)	Acc@1  52.34 ( 58.18)	Acc@5  76.17 ( 80.37)
+Epoch: [0][1180/5005]	Time  0.250 ( 0.257)	Data  0.000 ( 0.017)	Loss 1.8427e+00 (1.8187e+00)	Acc@1  58.20 ( 58.19)	Acc@5  80.86 ( 80.38)
+Epoch: [0][1190/5005]	Time  0.244 ( 0.257)	Data  0.000 ( 0.017)	Loss 2.0586e+00 (1.8193e+00)	Acc@1  54.69 ( 58.17)	Acc@5  76.17 ( 80.37)
+Epoch: [0][1200/5005]	Time  0.250 ( 0.257)	Data  0.000 ( 0.017)	Loss 2.0394e+00 (1.8202e+00)	Acc@1  53.12 ( 58.16)	Acc@5  76.17 ( 80.35)
+Epoch: [0][1210/5005]	Time  0.251 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.7658e+00 (1.8205e+00)	Acc@1  56.25 ( 58.15)	Acc@5  81.25 ( 80.35)
+Epoch: [0][1220/5005]	Time  0.262 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.7537e+00 (1.8207e+00)	Acc@1  58.98 ( 58.14)	Acc@5  81.25 ( 80.34)
+Epoch: [0][1230/5005]	Time  0.245 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.8556e+00 (1.8207e+00)	Acc@1  57.42 ( 58.14)	Acc@5  79.30 ( 80.34)
+Epoch: [0][1240/5005]	Time  0.246 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.9134e+00 (1.8210e+00)	Acc@1  53.52 ( 58.14)	Acc@5  81.25 ( 80.34)
+Epoch: [0][1250/5005]	Time  0.246 ( 0.256)	Data  0.000 ( 0.017)	Loss 2.0540e+00 (1.8216e+00)	Acc@1  55.47 ( 58.14)	Acc@5  75.39 ( 80.33)
+Epoch: [0][1260/5005]	Time  0.244 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.7936e+00 (1.8220e+00)	Acc@1  58.20 ( 58.13)	Acc@5  79.30 ( 80.32)
+Epoch: [0][1270/5005]	Time  0.265 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.9218e+00 (1.8219e+00)	Acc@1  56.64 ( 58.13)	Acc@5  79.30 ( 80.32)
+Epoch: [0][1280/5005]	Time  0.247 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.9059e+00 (1.8220e+00)	Acc@1  57.42 ( 58.13)	Acc@5  77.73 ( 80.32)
+Epoch: [0][1290/5005]	Time  0.247 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.7789e+00 (1.8221e+00)	Acc@1  58.98 ( 58.13)	Acc@5  80.47 ( 80.33)
+Epoch: [0][1300/5005]	Time  0.241 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.9558e+00 (1.8223e+00)	Acc@1  54.69 ( 58.12)	Acc@5  78.91 ( 80.33)
+Epoch: [0][1310/5005]	Time  0.246 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.6033e+00 (1.8221e+00)	Acc@1  61.72 ( 58.12)	Acc@5  85.16 ( 80.33)
+Epoch: [0][1320/5005]	Time  0.245 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.7877e+00 (1.8219e+00)	Acc@1  59.77 ( 58.13)	Acc@5  80.47 ( 80.33)
+Epoch: [0][1330/5005]	Time  0.247 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.6902e+00 (1.8221e+00)	Acc@1  59.77 ( 58.13)	Acc@5  85.16 ( 80.33)
+Epoch: [0][1340/5005]	Time  0.246 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.8085e+00 (1.8228e+00)	Acc@1  58.59 ( 58.12)	Acc@5  81.64 ( 80.31)
+Epoch: [0][1350/5005]	Time  0.248 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.6621e+00 (1.8232e+00)	Acc@1  62.11 ( 58.12)	Acc@5  82.81 ( 80.31)
+Epoch: [0][1360/5005]	Time  0.246 ( 0.256)	Data  0.000 ( 0.017)	Loss 1.8863e+00 (1.8235e+00)	Acc@1  59.77 ( 58.11)	Acc@5  77.34 ( 80.30)
+Epoch: [0][1370/5005]	Time  0.241 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.8165e+00 (1.8234e+00)	Acc@1  59.38 ( 58.12)	Acc@5  80.47 ( 80.30)
+Epoch: [0][1380/5005]	Time  0.239 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.7272e+00 (1.8234e+00)	Acc@1  58.98 ( 58.12)	Acc@5  80.47 ( 80.31)
+Epoch: [0][1390/5005]	Time  0.246 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.9005e+00 (1.8237e+00)	Acc@1  57.42 ( 58.12)	Acc@5  79.30 ( 80.30)
+Epoch: [0][1400/5005]	Time  0.247 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.9939e+00 (1.8238e+00)	Acc@1  52.34 ( 58.11)	Acc@5  77.73 ( 80.30)
+Epoch: [0][1410/5005]	Time  0.247 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.5906e+00 (1.8233e+00)	Acc@1  62.50 ( 58.12)	Acc@5  81.64 ( 80.31)
+Epoch: [0][1420/5005]	Time  0.247 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.8006e+00 (1.8234e+00)	Acc@1  60.55 ( 58.11)	Acc@5  79.30 ( 80.31)
+Epoch: [0][1430/5005]	Time  0.270 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.8070e+00 (1.8238e+00)	Acc@1  58.98 ( 58.11)	Acc@5  80.86 ( 80.30)
+Epoch: [0][1440/5005]	Time  0.246 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.9944e+00 (1.8244e+00)	Acc@1  53.12 ( 58.09)	Acc@5  78.12 ( 80.29)
+Epoch: [0][1450/5005]	Time  0.253 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.7791e+00 (1.8245e+00)	Acc@1  58.20 ( 58.09)	Acc@5  80.47 ( 80.29)
+Epoch: [0][1460/5005]	Time  0.249 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.9102e+00 (1.8244e+00)	Acc@1  56.64 ( 58.09)	Acc@5  78.52 ( 80.29)
+Epoch: [0][1470/5005]	Time  0.244 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.7427e+00 (1.8251e+00)	Acc@1  57.81 ( 58.07)	Acc@5  81.25 ( 80.28)
+Epoch: [0][1480/5005]	Time  0.249 ( 0.255)	Data  0.000 ( 0.017)	Loss 2.0183e+00 (1.8260e+00)	Acc@1  56.25 ( 58.05)	Acc@5  77.73 ( 80.27)
+Epoch: [0][1490/5005]	Time  0.243 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.6641e+00 (1.8263e+00)	Acc@1  64.84 ( 58.05)	Acc@5  82.42 ( 80.26)
+Epoch: [0][1500/5005]	Time  0.246 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.7249e+00 (1.8265e+00)	Acc@1  61.33 ( 58.05)	Acc@5  82.03 ( 80.26)
+Epoch: [0][1510/5005]	Time  0.239 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.7981e+00 (1.8268e+00)	Acc@1  58.20 ( 58.04)	Acc@5  79.69 ( 80.25)
+Epoch: [0][1520/5005]	Time  0.245 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.7972e+00 (1.8264e+00)	Acc@1  56.25 ( 58.05)	Acc@5  82.03 ( 80.26)
+Epoch: [0][1530/5005]	Time  0.262 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.9607e+00 (1.8265e+00)	Acc@1  56.64 ( 58.05)	Acc@5  80.08 ( 80.26)
+Epoch: [0][1540/5005]	Time  0.246 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.9854e+00 (1.8269e+00)	Acc@1  54.30 ( 58.04)	Acc@5  81.25 ( 80.25)
+Epoch: [0][1550/5005]	Time  0.219 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.9521e+00 (1.8272e+00)	Acc@1  53.12 ( 58.03)	Acc@5  79.30 ( 80.25)
+Epoch: [0][1560/5005]	Time  0.271 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.7291e+00 (1.8281e+00)	Acc@1  58.20 ( 58.01)	Acc@5  82.42 ( 80.23)
+Epoch: [0][1570/5005]	Time  0.243 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.7517e+00 (1.8278e+00)	Acc@1  60.16 ( 58.02)	Acc@5  83.98 ( 80.24)
+Epoch: [0][1580/5005]	Time  0.245 ( 0.255)	Data  0.000 ( 0.017)	Loss 1.9205e+00 (1.8277e+00)	Acc@1  55.86 ( 58.01)	Acc@5  76.17 ( 80.25)
+Epoch: [0][1590/5005]	Time  0.244 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.7039e+00 (1.8282e+00)	Acc@1  58.98 ( 58.00)	Acc@5  80.86 ( 80.24)
+Epoch: [0][1600/5005]	Time  0.223 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.7883e+00 (1.8281e+00)	Acc@1  59.38 ( 58.00)	Acc@5  81.64 ( 80.25)
+Epoch: [0][1610/5005]	Time  0.246 ( 0.254)	Data  0.000 ( 0.017)	Loss 2.1350e+00 (1.8285e+00)	Acc@1  53.52 ( 57.99)	Acc@5  76.56 ( 80.24)
+Epoch: [0][1620/5005]	Time  0.251 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.7417e+00 (1.8283e+00)	Acc@1  58.98 ( 57.99)	Acc@5  81.25 ( 80.25)
+Epoch: [0][1630/5005]	Time  0.251 ( 0.254)	Data  0.000 ( 0.017)	Loss 2.0638e+00 (1.8288e+00)	Acc@1  55.47 ( 57.98)	Acc@5  76.17 ( 80.23)
+Epoch: [0][1640/5005]	Time  0.245 ( 0.254)	Data  0.000 ( 0.017)	Loss 2.1624e+00 (1.8296e+00)	Acc@1  48.44 ( 57.96)	Acc@5  76.56 ( 80.22)
+Epoch: [0][1650/5005]	Time  0.249 ( 0.254)	Data  0.000 ( 0.017)	Loss 2.0210e+00 (1.8302e+00)	Acc@1  54.30 ( 57.94)	Acc@5  79.30 ( 80.21)
+Epoch: [0][1660/5005]	Time  0.249 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.6998e+00 (1.8299e+00)	Acc@1  59.77 ( 57.95)	Acc@5  80.47 ( 80.21)
+Epoch: [0][1670/5005]	Time  0.244 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.7784e+00 (1.8299e+00)	Acc@1  58.59 ( 57.95)	Acc@5  80.86 ( 80.22)
+Epoch: [0][1680/5005]	Time  0.247 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.8804e+00 (1.8299e+00)	Acc@1  55.47 ( 57.95)	Acc@5  80.08 ( 80.22)
+Epoch: [0][1690/5005]	Time  0.246 ( 0.254)	Data  0.000 ( 0.017)	Loss 2.1829e+00 (1.8303e+00)	Acc@1  54.69 ( 57.95)	Acc@5  73.83 ( 80.21)
+Epoch: [0][1700/5005]	Time  0.238 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.8017e+00 (1.8307e+00)	Acc@1  57.81 ( 57.94)	Acc@5  82.42 ( 80.21)
+Epoch: [0][1710/5005]	Time  0.243 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.7555e+00 (1.8308e+00)	Acc@1  61.72 ( 57.95)	Acc@5  82.42 ( 80.21)
+Epoch: [0][1720/5005]	Time  0.249 ( 0.254)	Data  0.000 ( 0.017)	Loss 2.0591e+00 (1.8311e+00)	Acc@1  52.73 ( 57.94)	Acc@5  78.91 ( 80.20)
+Epoch: [0][1730/5005]	Time  0.252 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.9204e+00 (1.8318e+00)	Acc@1  57.03 ( 57.93)	Acc@5  78.52 ( 80.19)
+Epoch: [0][1740/5005]	Time  0.248 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.8838e+00 (1.8322e+00)	Acc@1  57.81 ( 57.92)	Acc@5  78.91 ( 80.19)
+Epoch: [0][1750/5005]	Time  0.248 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.9403e+00 (1.8322e+00)	Acc@1  54.30 ( 57.91)	Acc@5  79.30 ( 80.19)
+Epoch: [0][1760/5005]	Time  0.227 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.9368e+00 (1.8326e+00)	Acc@1  55.08 ( 57.90)	Acc@5  76.56 ( 80.18)
+Epoch: [0][1770/5005]	Time  0.248 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.9974e+00 (1.8330e+00)	Acc@1  56.25 ( 57.89)	Acc@5  79.30 ( 80.17)
+Epoch: [0][1780/5005]	Time  0.245 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.8581e+00 (1.8333e+00)	Acc@1  57.81 ( 57.89)	Acc@5  77.73 ( 80.16)
+Epoch: [0][1790/5005]	Time  0.248 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.5884e+00 (1.8333e+00)	Acc@1  60.94 ( 57.88)	Acc@5  86.33 ( 80.16)
+Epoch: [0][1800/5005]	Time  0.249 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.7728e+00 (1.8335e+00)	Acc@1  60.94 ( 57.88)	Acc@5  82.42 ( 80.16)
+Epoch: [0][1810/5005]	Time  0.244 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.8136e+00 (1.8338e+00)	Acc@1  57.81 ( 57.87)	Acc@5  78.12 ( 80.16)
+Epoch: [0][1820/5005]	Time  0.242 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.7912e+00 (1.8342e+00)	Acc@1  55.47 ( 57.86)	Acc@5  83.59 ( 80.16)
+Epoch: [0][1830/5005]	Time  0.245 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.7736e+00 (1.8343e+00)	Acc@1  60.94 ( 57.86)	Acc@5  82.42 ( 80.16)
+Epoch: [0][1840/5005]	Time  0.249 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.8237e+00 (1.8342e+00)	Acc@1  58.20 ( 57.86)	Acc@5  82.81 ( 80.16)
+Epoch: [0][1850/5005]	Time  0.246 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.8662e+00 (1.8345e+00)	Acc@1  56.64 ( 57.85)	Acc@5  78.12 ( 80.15)
+Epoch: [0][1860/5005]	Time  0.243 ( 0.254)	Data  0.000 ( 0.017)	Loss 1.6282e+00 (1.8350e+00)	Acc@1  65.23 ( 57.84)	Acc@5  81.25 ( 80.14)
+Epoch: [0][1870/5005]	Time  0.247 ( 0.253)	Data  0.000 ( 0.017)	Loss 2.1587e+00 (1.8353e+00)	Acc@1  56.64 ( 57.84)	Acc@5  76.17 ( 80.14)
+Epoch: [0][1880/5005]	Time  0.239 ( 0.253)	Data  0.000 ( 0.017)	Loss 2.0201e+00 (1.8355e+00)	Acc@1  53.91 ( 57.83)	Acc@5  76.17 ( 80.14)
+Epoch: [0][1890/5005]	Time  0.245 ( 0.253)	Data  0.000 ( 0.017)	Loss 1.8514e+00 (1.8361e+00)	Acc@1  58.59 ( 57.82)	Acc@5  79.30 ( 80.13)
+Epoch: [0][1900/5005]	Time  0.245 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.8473e+00 (1.8364e+00)	Acc@1  59.77 ( 57.81)	Acc@5  81.64 ( 80.12)
+Epoch: [0][1910/5005]	Time  0.256 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.8162e+00 (1.8365e+00)	Acc@1  59.38 ( 57.81)	Acc@5  81.64 ( 80.12)
+Epoch: [0][1920/5005]	Time  0.263 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.7336e+00 (1.8369e+00)	Acc@1  59.77 ( 57.80)	Acc@5  82.81 ( 80.11)
+Epoch: [0][1930/5005]	Time  0.241 ( 0.253)	Data  0.000 ( 0.016)	Loss 2.0075e+00 (1.8371e+00)	Acc@1  53.91 ( 57.80)	Acc@5  78.12 ( 80.11)
+Epoch: [0][1940/5005]	Time  0.249 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.9361e+00 (1.8373e+00)	Acc@1  55.08 ( 57.79)	Acc@5  79.30 ( 80.10)
+Epoch: [0][1950/5005]	Time  0.244 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.9890e+00 (1.8373e+00)	Acc@1  58.59 ( 57.79)	Acc@5  78.52 ( 80.10)
+Epoch: [0][1960/5005]	Time  0.225 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.8043e+00 (1.8373e+00)	Acc@1  61.33 ( 57.79)	Acc@5  80.47 ( 80.10)
+Epoch: [0][1970/5005]	Time  0.245 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.5892e+00 (1.8371e+00)	Acc@1  60.55 ( 57.80)	Acc@5  85.94 ( 80.11)
+Epoch: [0][1980/5005]	Time  0.245 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.5999e+00 (1.8371e+00)	Acc@1  62.50 ( 57.80)	Acc@5  85.16 ( 80.10)
+Epoch: [0][1990/5005]	Time  0.247 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.7798e+00 (1.8371e+00)	Acc@1  58.98 ( 57.79)	Acc@5  80.08 ( 80.11)
+Epoch: [0][2000/5005]	Time  0.242 ( 0.253)	Data  0.000 ( 0.016)	Loss 2.0938e+00 (1.8372e+00)	Acc@1  54.69 ( 57.79)	Acc@5  75.00 ( 80.10)
+Epoch: [0][2010/5005]	Time  0.245 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.7365e+00 (1.8372e+00)	Acc@1  59.77 ( 57.79)	Acc@5  82.03 ( 80.11)
+Epoch: [0][2020/5005]	Time  0.251 ( 0.253)	Data  0.000 ( 0.016)	Loss 2.2049e+00 (1.8377e+00)	Acc@1  51.17 ( 57.78)	Acc@5  73.44 ( 80.10)
+Epoch: [0][2030/5005]	Time  0.248 ( 0.253)	Data  0.000 ( 0.016)	Loss 2.0084e+00 (1.8379e+00)	Acc@1  53.91 ( 57.78)	Acc@5  80.86 ( 80.10)
+Epoch: [0][2040/5005]	Time  0.253 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.8728e+00 (1.8385e+00)	Acc@1  56.64 ( 57.77)	Acc@5  81.25 ( 80.09)
+Epoch: [0][2050/5005]	Time  0.244 ( 0.253)	Data  0.000 ( 0.016)	Loss 2.1031e+00 (1.8392e+00)	Acc@1  52.73 ( 57.76)	Acc@5  77.34 ( 80.08)
+Epoch: [0][2060/5005]	Time  0.242 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.6333e+00 (1.8393e+00)	Acc@1  59.77 ( 57.76)	Acc@5  82.81 ( 80.07)
+Epoch: [0][2070/5005]	Time  0.244 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.5847e+00 (1.8396e+00)	Acc@1  60.55 ( 57.75)	Acc@5  85.55 ( 80.07)
+Epoch: [0][2080/5005]	Time  0.255 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.9707e+00 (1.8400e+00)	Acc@1  56.64 ( 57.74)	Acc@5  77.73 ( 80.06)
+Epoch: [0][2090/5005]	Time  0.246 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.8336e+00 (1.8408e+00)	Acc@1  58.59 ( 57.73)	Acc@5  80.08 ( 80.05)
+Epoch: [0][2100/5005]	Time  0.241 ( 0.253)	Data  0.001 ( 0.016)	Loss 2.0231e+00 (1.8413e+00)	Acc@1  54.69 ( 57.72)	Acc@5  77.73 ( 80.04)
+Epoch: [0][2110/5005]	Time  0.244 ( 0.253)	Data  0.000 ( 0.016)	Loss 1.7442e+00 (1.8416e+00)	Acc@1  58.59 ( 57.71)	Acc@5  79.69 ( 80.04)
+Process Process-8:
+Process Process-9:
+Process Process-5:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+Process Process-11:
+Process Process-14:
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+Traceback (most recent call last):
+Traceback (most recent call last):
+Process Process-3:
+Process Process-10:
+Process Process-15:
+Process Process-6:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+    self._target(*self._args, **self._kwargs)
+    self.run()
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+    self.run()
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+    self.run()
+    self.run()
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+    self._target(*self._args, **self._kwargs)
+    self._target(*self._args, **self._kwargs)
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+    if not self._poll(timeout):
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+KeyboardInterrupt
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+    self.run()
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    if not self._poll(timeout):
+    if not self._poll(timeout):
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+    self._target(*self._args, **self._kwargs)
+    self._target(*self._args, **self._kwargs)
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+    if not self._poll(timeout):
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+KeyboardInterrupt
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+    if not self._poll(timeout):
+KeyboardInterrupt
+    if not self._poll(timeout):
+    if not self._poll(timeout):
+KeyboardInterrupt
+KeyboardInterrupt
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+    if not self._poll(timeout):
+    if not self._poll(timeout):
+KeyboardInterrupt
+KeyboardInterrupt
+Process Process-4:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+Process Process-7:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+    if not self._poll(timeout):
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+KeyboardInterrupt
+    if not self._poll(timeout):
+KeyboardInterrupt
+Process Process-1:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 106, in _worker_loop
+    samples = collate_fn([dataset[i] for i in batch_indices])
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torchvision/datasets/folder.py", line 101, in __getitem__
+    sample = self.loader(path)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torchvision/datasets/folder.py", line 145, in default_loader
+    return accimage_loader(path)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torchvision/datasets/folder.py", line 136, in accimage_loader
+    return accimage.Image(path)
+KeyboardInterrupt
+Process Process-16:
+Process Process-12:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+    self.run()
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 106, in _worker_loop
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+    samples = collate_fn([dataset[i] for i in batch_indices])
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torchvision/datasets/folder.py", line 101, in __getitem__
+    sample = self.loader(path)
+    if not self._poll(timeout):
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torchvision/datasets/folder.py", line 145, in default_loader
+    return accimage_loader(path)
+KeyboardInterrupt
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torchvision/datasets/folder.py", line 136, in accimage_loader
+    return accimage.Image(path)
+KeyboardInterrupt
+Process Process-13:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 96, in _worker_loop
+    r = index_queue.get(timeout=MANAGER_STATUS_CHECK_INTERVAL)
+  File "/usr/lib/python2.7/multiprocessing/queues.py", line 131, in get
+    if not self._poll(timeout):
+KeyboardInterrupt
+Process Process-2:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 267, in _bootstrap
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/utils/data/dataloader.py", line 106, in _worker_loop
+    samples = collate_fn([dataset[i] for i in batch_indices])
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torchvision/datasets/folder.py", line 101, in __getitem__
+    sample = self.loader(path)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torchvision/datasets/folder.py", line 145, in default_loader
+    return accimage_loader(path)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torchvision/datasets/folder.py", line 136, in accimage_loader
+    return accimage.Image(path)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "main.py", line 482, in <module>
+    main()
+  File "main.py", line 128, in main
+    main_worker(args.gpu, ngpus_per_node, args)
+  File "main.py", line 272, in main_worker
+    train(train_loader, model, criterion, optimizer, epoch, args)
+  File "main.py", line 344, in train
+    loss.backward()
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/tensor.py", line 93, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph)
+  File "/home/jiecaoyu/.local/lib/python2.7/site-packages/torch/autograd/__init__.py", line 90, in backward
+    allow_unreachable=True)  # allow_unreachable flag
+KeyboardInterrupt

@@ -83,6 +83,8 @@ parser.add_argument('--multiprocessing-distributed', action='store_true',
 
 parser.add_argument('--prune', default=None, type=str,
                     help='prune stage')
+parser.add_argument('--prune-ratio', default=0., type=float,
+                    help='pruning ratio')
 parser.add_argument('--admm-iter', default=10, type=int,
                     help='admm iter')
 parser.add_argument('--pho', default=1e-3, type=float,
@@ -212,10 +214,10 @@ def main_worker(gpu, ngpus_per_node, args):
     # generate the pruning operator for each stage
     global admm_op
     if args.prune == 'admm':
-        percentages = admm.gen_percentages(model, args.arch)
+        percentages = admm.gen_percentages(model, args.arch, args.prune_ratio)
         admm_op = admm.admm_op(model, percentages, args.admm_iter, args.pho)
     elif args.prune == 'retrain':
-        percentages = admm.gen_percentages(model, args.arch)
+        percentages = admm.gen_percentages(model, args.arch, args.prune_ratio)
         admm_op = admm.retrain_op(model, percentages)
         admm_op.apply_mask()
     elif args.prune:

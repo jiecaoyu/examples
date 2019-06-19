@@ -1,7 +1,19 @@
 from __future__ import absolute_import, division, print_function
+import torch.nn as nn
+
+def prunable(key, arch):
+    if 'resnet' in arch:
+        if 'fc' in key:
+            return False
+        elif not ('layer' in key):
+            return False
+        elif 'downsample' in key:
+            return False
+        return True
+    return False
 
 
-def gen_percentages(model, arch):
+def gen_percentages(model, arch, prune_ratio=0.):
     # This function is used to generate the target sparsity for
     # specific network. Here I am using AlexNet as an example.
     # It needs to be extended to support more networks. And a
@@ -19,6 +31,27 @@ def gen_percentages(model, arch):
                 'classifier.4.weight'       : 0.9,
                 'classifier.6.weight'       : 0.85,
                 }
+        return percentages_dict
+    elif arch == 'resnet18':
+        # determine the actual prune_ratio for target layers
+        params = model.state_dict()
+        prunable_weights = 0
+        unprunable_weights = 0
+        for key in params:
+            if ('weight' in key) and (len(params[key].shape) > 1):
+                if prunable(key, arch):
+                    prunable_weights += int(params[key].nelement())
+                else:
+                    unprunable_weights += int(params[key].nelement())
+        prune_ratio_layer = float(prunable_weights + unprunable_weights) * prune_ratio / \
+                float(prunable_weights)
+        percentages_dict = {}
+        for key in params:
+            if ('weight' in key) and (len(params[key].shape) > 1):
+                if prunable(key, arch):
+                    percentages_dict[key] = prune_ratio_layer
+                else:
+                    percentages_dict[key] = 0.
         return percentages_dict
     else:
         raise Exception ('{} not supported'.format(arch))
@@ -76,7 +109,7 @@ class admm_op():
 
                 target_mask_sum = \
                         self.U[index].sub(self.Z[index]).mul(1.0 - mask).abs().sum()
-                print('[{}] target_mask_sum: {:9.3f}'.format(index,
+                print('[{:3d}] target_mask_sum: {:9.3f}'.format(index,
                     target_mask_sum))
         print('\n')
         return
@@ -104,13 +137,13 @@ class admm_op():
             total_pruned += int(self.Z[index].eq(0.).float().sum())
             total_weight += int(self.Z[index].nelement())
             total_W_Z_error += W_Z_error
-            print('[{}] shape: {}\t W_Z_error: {:9.3f} target_sparsity: {:7.3f} small_sparsity: {:7.3f}'
+            print('[{:3d}] shape: {:30}\t W_Z_error: {:9.3f} target_sparsity: {:7.3f} small_sparsity: {:7.3f}'
                     .format(index,
                         self.W[index].data.shape,
                         W_Z_error,
                         target_sparsity,
                         small_sparsity))
-        print('[Total] W_Z_error: {:6.3f} target_sparsity: {:7.3f} small_sparsity: {:7.3f}'
+        print('\n[Total] W_Z_error: {:6.3f} target_sparsity: {:7.3f} small_sparsity: {:7.3f}\n'
                 .format(total_W_Z_error,
                     float(total_pruned) / float(total_weight),
                     float(total_small) / float(total_weight)))
