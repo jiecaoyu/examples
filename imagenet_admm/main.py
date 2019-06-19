@@ -218,7 +218,7 @@ def main_worker(gpu, ngpus_per_node, args):
         percentages = admm.gen_percentages(model, args.arch)
         admm_op = admm.retrain_op(model, percentages)
         admm_op.apply_mask()
-    else:
+    elif args.prune:
         raise Exception ("Please specify the prune stage: admm | retrain")
 
     # Data loading code
