@@ -4,3 +4,6 @@ data
 OpenNMT/data
 cpp/mnist/build
 cpp/dcgan/build
+
+*.log
+saved_models/

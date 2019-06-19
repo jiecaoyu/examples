@@ -20,6 +20,8 @@ import torchvision
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.models as models
+import admm
+import subprocess
 
 model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")
@@ -33,12 +35,14 @@ parser.add_argument('-a', '--arch', metavar='ARCH', default='resnet18',
                     help='model architecture: ' +
                         ' | '.join(model_names) +
                         ' (default: resnet18)')
-parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
-                    help='number of data loading workers (default: 4)')
+parser.add_argument('-j', '--workers', default=16, type=int, metavar='N',
+                    help='number of data loading workers (default: 16)')
 parser.add_argument('--epochs', default=90, type=int, metavar='N',
                     help='number of total epochs to run')
 parser.add_argument('--start-epoch', default=0, type=int, metavar='N',
                     help='manual epoch number (useful on restarts)')
+parser.add_argument('--lr-epochs', default=30, type=int,
+                    help='lr decay epochs')
 parser.add_argument('-b', '--batch-size', default=256, type=int,
                     metavar='N',
                     help='mini-batch size (default: 256), this is the total '
@@ -77,11 +81,18 @@ parser.add_argument('--multiprocessing-distributed', action='store_true',
                          'fastest way to use PyTorch for either single node or '
                          'multi node data parallel training')
 
+parser.add_argument('--prune', default=None, type=str,
+                    help='prune stage')
+parser.add_argument('--admm-iter', default=10, type=int,
+                    help='admm iter')
+parser.add_argument('--pho', default=1e-3, type=float,
+                    help='admm pho')
 best_acc1 = 0
 
 
 def main():
     args = parser.parse_args()
+    print(args)
 
     if args.seed is not None:
         random.seed(args.seed)
@@ -181,7 +192,8 @@ def main_worker(gpu, ngpus_per_node, args):
         if os.path.isfile(args.resume):
             print("=> loading checkpoint '{}'".format(args.resume))
             checkpoint = torch.load(args.resume)
-            args.start_epoch = checkpoint['epoch']
+            if args.prune != 'retrain':
+                args.start_epoch = checkpoint['epoch']
             best_acc1 = checkpoint['best_acc1']
             if args.gpu is not None:
                 # best_acc1 may be from a checkpoint from a different GPU
@@ -194,6 +206,15 @@ def main_worker(gpu, ngpus_per_node, args):
             print("=> no checkpoint found at '{}'".format(args.resume))
 
     cudnn.benchmark = True
+
+    global admm_op
+    if args.prune == 'admm':
+        percentages = admm.gen_percentages(model, args.arch)
+        admm_op = admm.admm_op(model, percentages, args.admm_iter, args.pho)
+    elif args.prune == 'retrain':
+        percentages = admm.gen_percentages(model, args.arch)
+        admm_op = admm.retrain_op(model, percentages)
+        admm_op.apply_mask()
 
     # Data loading code
     traindir = os.path.join(args.data, 'train')
@@ -250,6 +271,17 @@ def main_worker(gpu, ngpus_per_node, args):
         is_best = acc1 > best_acc1
         best_acc1 = max(acc1, best_acc1)
 
+        if args.prune == 'admm' or args.prune == 'retrain':
+            subprocess.call('mkdir -p saved_models/', shell=True)
+            save_checkpoint({
+                'epoch': epoch + 1,
+                'arch': args.arch,
+                'state_dict': model.state_dict(),
+                'best_acc1': best_acc1,
+                'optimizer' : optimizer.state_dict(),
+            }, False, filename='saved_models/{}.{}.pth.tar'.format(args.arch, args.prune))
+            continue
+
         if not args.multiprocessing_distributed or (args.multiprocessing_distributed
                 and args.rank % ngpus_per_node == 0):
             save_checkpoint({
@@ -273,6 +305,12 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
     # switch to train mode
     model.train()
 
+    if args.prune == 'admm':
+        admm_op.update(epoch)
+        admm_op.print_info()
+    elif args.prune == 'retrain':
+        admm_op.print_info()
+
     end = time.time()
     for i, (input, target) in enumerate(train_loader):
         # measure data loading time
@@ -295,7 +333,14 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
         # compute gradient and do SGD step
         optimizer.zero_grad()
         loss.backward()
+
+        if args.prune == 'admm':
+            admm_op.loss_grad()
+
         optimizer.step()
+
+        if args.prune == 'retrain':
+            admm_op.apply_mask()
 
         # measure elapsed time
         batch_time.update(time.time() - end)
@@ -315,6 +360,9 @@ def validate(val_loader, model, criterion, args):
 
     # switch to evaluate mode
     model.eval()
+
+    if args.prune == 'retrain':
+        admm_op.apply_mask()
 
     with torch.no_grad():
         end = time.time()
@@ -396,9 +444,10 @@ class ProgressMeter(object):
 
 def adjust_learning_rate(optimizer, epoch, args):
     """Sets the learning rate to the initial LR decayed by 10 every 30 epochs"""
-    lr = args.lr * (0.1 ** (epoch // 30))
+    lr = args.lr * (0.1 ** (epoch // args.lr_epochs))
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
+    print('Current LR:', optimizer.param_groups[0]['lr'])
 
 
 def accuracy(output, target, topk=(1,)):
