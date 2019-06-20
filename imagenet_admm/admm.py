@@ -2,12 +2,19 @@ from __future__ import absolute_import, division, print_function
 import torch.nn as nn
 
 def prunable(key, arch):
-    if 'resnet' in arch:
+    if arch == 'resnet18':
         if 'fc' in key:
             return False
         elif not ('layer' in key):
             return False
         elif 'downsample' in key:
+            return False
+        return True
+    elif arch == 'resnet50':
+        # also prune downsample since it contains too much weights
+        if 'fc' in key:
+            return False
+        elif not ('layer' in key):
             return False
         return True
     return False
@@ -33,6 +40,27 @@ def gen_percentages(model, arch, prune_ratio=0.):
                 }
         return percentages_dict
     elif arch == 'resnet18':
+        # determine the actual prune_ratio for target layers
+        params = model.state_dict()
+        prunable_weights = 0
+        unprunable_weights = 0
+        for key in params:
+            if ('weight' in key) and (len(params[key].shape) > 1):
+                if prunable(key, arch):
+                    prunable_weights += int(params[key].nelement())
+                else:
+                    unprunable_weights += int(params[key].nelement())
+        prune_ratio_layer = float(prunable_weights + unprunable_weights) * prune_ratio / \
+                float(prunable_weights)
+        percentages_dict = {}
+        for key in params:
+            if ('weight' in key) and (len(params[key].shape) > 1):
+                if prunable(key, arch):
+                    percentages_dict[key] = prune_ratio_layer
+                else:
+                    percentages_dict[key] = 0.
+        return percentages_dict
+    elif arch == 'resnet50':
         # determine the actual prune_ratio for target layers
         params = model.state_dict()
         prunable_weights = 0
