@@ -13,7 +13,7 @@ def prunable(key, arch):
     elif arch == 'resnet50':
         # also prune downsample since it contains too much weights
         if 'fc' in key:
-            return False
+            return True
         elif not ('layer' in key):
             return False
         return True
@@ -167,12 +167,12 @@ class admm_op():
             total_W_Z_error += W_Z_error
             print('[{:3d}] shape: {:30}\t W_Z_error: {:9.3f} target_sparsity: {:7.3f} small_sparsity: {:7.3f}'
                     .format(index,
-                        self.W[index].data.shape,
-                        W_Z_error,
-                        target_sparsity,
-                        small_sparsity))
+                        list(self.W[index].data.shape),
+                        float(W_Z_error),
+                        float(target_sparsity),
+                        float(small_sparsity)))
         print('\n[Total] W_Z_error: {:6.3f} target_sparsity: {:7.3f} small_sparsity: {:7.3f}\n'
-                .format(total_W_Z_error,
+                .format(float(total_W_Z_error),
                     float(total_pruned) / float(total_weight),
                     float(total_small) / float(total_weight)))
         print('-' * 30 + '\n')
@@ -229,7 +229,7 @@ class retrain_op():
             weight_total += weight_tmp
             print('[{:3d}] {:11d}/{:11d} = {:7.3f}%'.format(
                 index,
-                pruned_tmp, weight_tmp,
+                int(pruned_tmp), int(weight_tmp),
                 float(pruned_tmp) / float(weight_tmp)
                 ))
         print('\nTotal {:11d}/{:11d} = {:7.3f}%\n'.format(
